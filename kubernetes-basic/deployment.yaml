@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  selector:
+    matchLabels:
+      app: hello
+      tier: frontend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+        - name: hello
+          image: "helvellyn/training"
+          ports:
+            - name: http
+              containerPort: 80
