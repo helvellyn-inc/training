@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: apps/v1   #https://kubernetes.io/docs/reference/  https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.19/
 kind: Deployment
 metadata:
   name: hello
@@ -21,4 +21,23 @@ spec:
           image: "helvellyn/training"
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
+
+              apiVersion: v1
+kind: Service
+metadata:
+  name: hello
+  labels:
+    app: hello 
+    tier: frontend 
+    track: stable
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+  selector:
+    app: hello
+    tier: frontend
+    track: stable  
+  type: NodePort # Worked example of port forwarding / explain how portforwarding works.
+   
